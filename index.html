@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wenqing Zhang — Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ─── NAV ────────────────────────────────────────────── -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#hero">WZ</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#career">Career</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#articles">Articles</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile" id="navMobile">
+      <a href="#about" class="nav-mobile-link">About</a>
+      <a href="#career" class="nav-mobile-link">Career</a>
+      <a href="#skills" class="nav-mobile-link">Skills</a>
+      <a href="#articles" class="nav-mobile-link">Articles</a>
+      <a href="#contact" class="nav-mobile-link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ────────────────────────────────────────────── -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="container hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Open to opportunities
+      </div>
+      <h1 class="hero-title">
+        Hi, I'm <span class="gradient-text">Wenqing Zhang</span>
+      </h1>
+      <p class="hero-subtitle">
+        Product Manager · Data Analyst · Tech Enthusiast
+      </p>
+      <p class="hero-desc">
+        I build data-driven products, translate complex insights into clear decisions,
+        and write about tech, career growth, and life in the intersection of East and West.
+      </p>
+      <div class="hero-actions">
+        <a href="#career" class="btn btn-primary">View My Journey</a>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">5+</span>
+          <span class="stat-label">Years Experience</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">12+</span>
+          <span class="stat-label">Articles Written</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">3</span>
+          <span class="stat-label">Countries Worked</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ─── ABOUT ────────────────────────────────────────────── -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-label">About Me</div>
+      <div class="about-grid">
+        <div class="about-text">
+          <h2 class="section-title">A bit about <span class="gradient-text">who I am</span></h2>
+          <p>
+            I'm a product-minded professional who thrives at the intersection of data, technology,
+            and people. With a background spanning product management, data analytics, and
+            cross-cultural communication, I've helped teams ship better products faster.
+          </p>
+          <p>
+            Born in China, studied and worked internationally — I bring a unique perspective
+            that bridges Eastern and Western work cultures. I write in both English and Chinese
+            to share what I've learned along the way.
+          </p>
+          <div class="about-tags">
+            <span class="tag">Product Strategy</span>
+            <span class="tag">Data Analytics</span>
+            <span class="tag">User Research</span>
+            <span class="tag">A/B Testing</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Python</span>
+          </div>
+        </div>
+        <div class="about-card-stack">
+          <div class="info-card">
+            <div class="info-card-icon">🎓</div>
+            <div>
+              <div class="info-card-title">Education</div>
+              <div class="info-card-value">Master's in [Your Field]</div>
+              <div class="info-card-sub">[Your University], 20XX</div>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">📍</div>
+            <div>
+              <div class="info-card-title">Location</div>
+              <div class="info-card-value">[Your City, Country]</div>
+              <div class="info-card-sub">Available for remote & on-site</div>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">🌐</div>
+            <div>
+              <div class="info-card-title">Languages</div>
+              <div class="info-card-value">Chinese (Native) · English (Fluent)</div>
+              <div class="info-card-sub">Writing in both</div>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">✍️</div>
+            <div>
+              <div class="info-card-title">Also writing on</div>
+              <div class="info-card-value">小红书 (RED)</div>
+              <div class="info-card-sub">Career, life abroad, tech thoughts</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CAREER TIMELINE ─────────────────────────────────── -->
+  <section class="section section-alt" id="career">
+    <div class="container">
+      <div class="section-label">Career Path</div>
+      <h2 class="section-title">My <span class="gradient-text">Journey</span></h2>
+      <p class="section-desc">From student to professional — the milestones that shaped who I am today.</p>
+
+      <div class="timeline">
+
+        <div class="timeline-item" data-year="2024–Present">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-meta">
+              <span class="timeline-date">2024 – Present</span>
+              <span class="timeline-badge current">Current</span>
+            </div>
+            <h3 class="timeline-role">[Your Current Role]</h3>
+            <div class="timeline-company">[Company Name] · [City, Country]</div>
+            <p class="timeline-desc">
+              [Describe your current role and key impact — e.g., "Leading product strategy for a B2B SaaS platform serving 50K+ users. Drove a 30% increase in user retention through data-driven feature prioritization."]
+            </p>
+            <div class="timeline-tags">
+              <span class="tag-sm">Product Management</span>
+              <span class="tag-sm">Data Analysis</span>
+              <span class="tag-sm">Roadmapping</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-year="2022–2024">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-meta">
+              <span class="timeline-date">2022 – 2024</span>
+            </div>
+            <h3 class="timeline-role">[Previous Role]</h3>
+            <div class="timeline-company">[Company Name] · [City, Country]</div>
+            <p class="timeline-desc">
+              [Describe your impact — key projects, metrics, technologies used.]
+            </p>
+            <div class="timeline-tags">
+              <span class="tag-sm">SQL</span>
+              <span class="tag-sm">Python</span>
+              <span class="tag-sm">Tableau</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-year="2020–2022">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-meta">
+              <span class="timeline-date">2020 – 2022</span>
+            </div>
+            <h3 class="timeline-role">[Earlier Role or Internship]</h3>
+            <div class="timeline-company">[Company Name] · [City, Country]</div>
+            <p class="timeline-desc">
+              [Describe what you worked on and what you learned.]
+            </p>
+            <div class="timeline-tags">
+              <span class="tag-sm">Market Research</span>
+              <span class="tag-sm">Excel</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-year="2018–2020">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-meta">
+              <span class="timeline-date">2018 – 2020</span>
+            </div>
+            <h3 class="timeline-role">Graduate Studies</h3>
+            <div class="timeline-company">[University Name] · [City, Country]</div>
+            <p class="timeline-desc">
+              [Describe your graduate program, thesis topic, or key projects.]
+            </p>
+            <div class="timeline-tags">
+              <span class="tag-sm">Research</span>
+              <span class="tag-sm">Statistics</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SKILLS ──────────────────────────────────────────── -->
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="section-label">Skills & Tools</div>
+      <h2 class="section-title">What I <span class="gradient-text">work with</span></h2>
+
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-header">
+            <span class="skill-group-icon">📊</span>
+            <h3>Data & Analytics</h3>
+          </div>
+          <div class="skill-bars">
+            <div class="skill-bar-item">
+              <div class="skill-bar-label"><span>SQL</span><span>90%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:90%"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-label"><span>Python (Pandas, NumPy)</span><span>75%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:75%"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-label"><span>Tableau / Looker</span><span>80%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:80%"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-label"><span>Excel / Google Sheets</span><span>95%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:95%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-header">
+            <span class="skill-group-icon">🚀</span>
+            <h3>Product Management</h3>
+          </div>
+          <div class="skill-bars">
+            <div class="skill-bar-item">
+              <div class="skill-bar-label"><span>Product Roadmapping</span><span>85%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:85%"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-label"><span>User Research / UX</span><span>80%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:80%"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-label"><span>A/B Testing</span><span>75%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:75%"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-label"><span>Agile / Scrum</span><span>85%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:85%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-header">
+            <span class="skill-group-icon">🛠️</span>
+            <h3>Tools & Platforms</h3>
+          </div>
+          <div class="tools-grid">
+            <div class="tool-chip">Jira</div>
+            <div class="tool-chip">Notion</div>
+            <div class="tool-chip">Figma</div>
+            <div class="tool-chip">Mixpanel</div>
+            <div class="tool-chip">Amplitude</div>
+            <div class="tool-chip">GitHub</div>
+            <div class="tool-chip">BigQuery</div>
+            <div class="tool-chip">Snowflake</div>
+            <div class="tool-chip">dbt</div>
+            <div class="tool-chip">Airflow</div>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-header">
+            <span class="skill-group-icon">🌍</span>
+            <h3>Soft Skills</h3>
+          </div>
+          <div class="tools-grid">
+            <div class="tool-chip">Cross-cultural comm.</div>
+            <div class="tool-chip">Stakeholder mgmt.</div>
+            <div class="tool-chip">Technical writing</div>
+            <div class="tool-chip">Data storytelling</div>
+            <div class="tool-chip">Mentoring</div>
+            <div class="tool-chip">Public speaking</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ARTICLES ─────────────────────────────────────────── -->
+  <section class="section section-alt" id="articles">
+    <div class="container">
+      <div class="section-label">Writing</div>
+      <h2 class="section-title">Articles & <span class="gradient-text">Thoughts</span></h2>
+      <p class="section-desc">I write about career growth, product thinking, data, and life as an international professional. Most content is in Chinese on 小红书.</p>
+
+      <div class="articles-grid">
+
+        <article class="article-card featured">
+          <div class="article-meta">
+            <span class="article-platform red-platform">小红书</span>
+            <span class="article-date">Feb 2025</span>
+          </div>
+          <h3 class="article-title">[Article Title in Chinese / English]</h3>
+          <p class="article-excerpt">
+            [Paste your article excerpt or summary here. E.g., "海外打工人的职场生存指南：如何在跨文化团队中建立影响力..."]
+          </p>
+          <div class="article-tags">
+            <span class="tag-sm">职场</span>
+            <span class="tag-sm">海外</span>
+          </div>
+          <a href="#" class="article-link">Read more →</a>
+        </article>
+
+        <article class="article-card">
+          <div class="article-meta">
+            <span class="article-platform red-platform">小红书</span>
+            <span class="article-date">Jan 2025</span>
+          </div>
+          <h3 class="article-title">[Article Title]</h3>
+          <p class="article-excerpt">
+            [Article summary or opening paragraph...]
+          </p>
+          <div class="article-tags">
+            <span class="tag-sm">数据分析</span>
+            <span class="tag-sm">求职</span>
+          </div>
+          <a href="#" class="article-link">Read more →</a>
+        </article>
+
+        <article class="article-card">
+          <div class="article-meta">
+            <span class="article-platform red-platform">小红书</span>
+            <span class="article-date">Dec 2024</span>
+          </div>
+          <h3 class="article-title">[Article Title]</h3>
+          <p class="article-excerpt">
+            [Article summary or opening paragraph...]
+          </p>
+          <div class="article-tags">
+            <span class="tag-sm">产品经理</span>
+          </div>
+          <a href="#" class="article-link">Read more →</a>
+        </article>
+
+        <article class="article-card">
+          <div class="article-meta">
+            <span class="article-platform red-platform">小红书</span>
+            <span class="article-date">Nov 2024</span>
+          </div>
+          <h3 class="article-title">[Article Title]</h3>
+          <p class="article-excerpt">
+            [Article summary or opening paragraph...]
+          </p>
+          <div class="article-tags">
+            <span class="tag-sm">留学</span>
+            <span class="tag-sm">职业规划</span>
+          </div>
+          <a href="#" class="article-link">Read more →</a>
+        </article>
+
+      </div>
+
+      <div class="articles-cta">
+        <a href="#" class="btn btn-ghost">See all articles on 小红书 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ──────────────────────────────────────────── -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">Let's <span class="gradient-text">Connect</span></h2>
+      <p class="section-desc">
+        Whether you want to talk product, data, career, or just say hi — my inbox is open.
+      </p>
+
+      <div class="contact-grid">
+        <div class="contact-links">
+          <a href="mailto:your@email.com" class="contact-card">
+            <div class="contact-card-icon">✉️</div>
+            <div>
+              <div class="contact-card-label">Email</div>
+              <div class="contact-card-value">your@email.com</div>
+            </div>
+          </a>
+          <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener" class="contact-card">
+            <div class="contact-card-icon">💼</div>
+            <div>
+              <div class="contact-card-label">LinkedIn</div>
+              <div class="contact-card-value">linkedin.com/in/yourprofile</div>
+            </div>
+          </a>
+          <a href="#" target="_blank" rel="noopener" class="contact-card">
+            <div class="contact-card-icon">📕</div>
+            <div>
+              <div class="contact-card-label">小红书 (RED)</div>
+              <div class="contact-card-value">@YourHandle</div>
+            </div>
+          </a>
+          <a href="#" class="contact-card">
+            <div class="contact-card-icon">📄</div>
+            <div>
+              <div class="contact-card-label">Resume</div>
+              <div class="contact-card-value">Download PDF</div>
+            </div>
+          </a>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="Jane Smith" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="jane@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" rows="4" placeholder="What's on your mind?" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="nav-logo">WZ</span>
+        <span>Wenqing Zhang · Built with ♥ and plain HTML</span>
+      </div>
+      <div class="footer-right">
+        <a href="#hero">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
