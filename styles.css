@@ -291,14 +291,15 @@ p:last-child { margin-bottom: 0; }
   border: 2.5px solid rgba(46,125,94,0.3);
   box-shadow: 0 2px 14px rgba(46,125,94,0.15);
   background: var(--bg-alt);
+  margin: 0 auto;
 }
 .profile-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 5%;
+  object-position: 50% 5%;
   transform: scale(1.8);
-  transform-origin: 42% 12%;
+  transform-origin: 50% 12%;
 }
 .hero-badge {
   display: inline-flex;
