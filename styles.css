@@ -274,11 +274,10 @@ p:last-child { margin-bottom: 0; }
 .profile-avatar-wrap {
   display: flex;
   justify-content: center;
-  margin-bottom: 4px;
-  padding: 0 16px;
+  margin-bottom: 12px;
 }
 .profile-avatar {
-  width: 100%;
+  width: 200px;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(80,60,30,0.12);
