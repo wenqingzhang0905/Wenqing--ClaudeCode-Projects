@@ -221,6 +221,32 @@ p:last-child { margin-bottom: 0; }
 .hero-content { position: relative; z-index: 1; }
 .hero-visual { display: flex; align-items: center; justify-content: center; }
 
+/* ─── PIXEL FACE ─────────────────────────────────────────── */
+.pixel-face-wrap {
+  position: relative;
+  display: inline-block;
+  border-radius: 12px;
+  overflow: hidden;
+}
+#pixelFace {
+  display: block;
+  max-width: 320px;
+  width: 100%;
+  image-rendering: pixelated;
+  border-radius: 12px;
+}
+.pixel-face-glow {
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(46,125,94,0.18) 0%, transparent 70%);
+  pointer-events: none;
+  animation: pixelGlow 4s ease-in-out infinite;
+}
+@keyframes pixelGlow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.04); }
+}
+
 /* ─── VENN DIAGRAM SVG ──────────────────────────────────── */
 .venn-svg {
   width: 100%;
