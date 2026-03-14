@@ -120,41 +120,63 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       }
     }
 
-    // Animate reveal: each pixel fades in at its random delay
-    const FADE    = 280;  // ms to fully fade in one pixel
-    const start   = performance.now();
-    let   settled = false;
+    // Phase 1: reveal — pixels fade in with random stagger
+    const FADE  = 280;
+    const start = performance.now();
 
-    function frame(now) {
-      if (settled) return;
-
+    function reveal(now) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       let allDone = true;
 
       for (const p of pixels) {
         const elapsed = now - start - p.delay;
         if (elapsed < 0) { allDone = false; continue; }
-
         const t = Math.min(1, elapsed / FADE);
         if (t < 1) allDone = false;
-
         ctx.fillStyle = `rgba(${p.r},${p.g},${p.b},${(p.a * t).toFixed(3)})`;
-        ctx.fillRect(
-          p.x * BLOCK + GAP,
-          p.y * BLOCK + GAP,
-          BLOCK - GAP,
-          BLOCK - GAP
-        );
+        ctx.fillRect(p.x * BLOCK + GAP, p.y * BLOCK + GAP, BLOCK - GAP, BLOCK - GAP);
       }
 
-      if (allDone) {
-        settled = true;
-      } else {
-        requestAnimationFrame(frame);
-      }
+      if (allDone) requestAnimationFrame(idle);
+      else         requestAnimationFrame(reveal);
     }
 
-    requestAnimationFrame(frame);
+    // Phase 2: idle — diagonal sine wave + random pixel sparks forever
+    const sparks = new Map(); // pixelIndex → sparkStartTime
+
+    function idle(now) {
+      const t = now * 0.00055; // wave speed
+
+      // ~5 new sparks per second
+      if (Math.random() < 0.08) {
+        sparks.set(Math.floor(Math.random() * pixels.length), now);
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < pixels.length; i++) {
+        const p = pixels[i];
+
+        // Slow diagonal wave (brightness 0.82–1.0)
+        const wave = Math.sin(t + (p.x + p.y) * 0.07) * 0.09 + 0.91;
+
+        // Short brightness spark (sine arc over 220 ms, up to +45%)
+        let spark = 1;
+        if (sparks.has(i)) {
+          const age = (now - sparks.get(i)) / 220;
+          if (age >= 1) sparks.delete(i);
+          else spark = 1 + Math.sin(age * Math.PI) * 0.45;
+        }
+
+        const b = wave * spark;
+        ctx.fillStyle = `rgba(${Math.min(255,Math.round(p.r*b))},${Math.min(255,Math.round(p.g*b))},${Math.min(255,Math.round(p.b*b))},${p.a})`;
+        ctx.fillRect(p.x * BLOCK + GAP, p.y * BLOCK + GAP, BLOCK - GAP, BLOCK - GAP);
+      }
+
+      requestAnimationFrame(idle);
+    }
+
+    requestAnimationFrame(reveal);
   };
 })();
 
