@@ -5,8 +5,8 @@ const navMobile = document.getElementById('navMobile');
 
 window.addEventListener('scroll', () => {
   nav.style.borderBottomColor = window.scrollY > 10
-    ? 'rgba(80,60,30,0.15)'
-    : 'rgba(80,60,30,0.1)';
+    ? 'rgba(61,186,124,0.22)'
+    : 'rgba(61,186,124,0.12)';
 });
 
 hamburger.addEventListener('click', () => {
@@ -78,9 +78,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   const canvas = document.getElementById('pixelFace');
   if (!canvas) return;
 
-  const BLOCK = 4;   // px per pixel block
-  const COLS  = 80;  // blocks wide  → 320px canvas
-  const ROWS  = 80;  // blocks tall  → 320px canvas
+  const BLOCK = 5;   // px per pixel block
+  const COLS  = 80;  // blocks wide  → 400px canvas
+  const ROWS  = 80;  // blocks tall  → 400px canvas
   const GAP   = 1;   // gap between blocks
 
   canvas.width  = COLS * BLOCK;
