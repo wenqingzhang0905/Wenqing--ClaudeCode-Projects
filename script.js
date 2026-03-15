@@ -78,10 +78,10 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   const canvas = document.getElementById('pixelFace');
   if (!canvas) return;
 
-  const BLOCK = 5;   // px per pixel block
-  const COLS  = 80;  // blocks wide  → 400px canvas
-  const ROWS  = 80;  // blocks tall  → 400px canvas
-  const GAP   = 1;   // gap between blocks
+  const BLOCK = 3;    // 3px grid → denser pixels
+  const COLS  = 133;  // 133×3 = 399px canvas
+  const ROWS  = 133;
+  const SZ    = BLOCK - 1; // 2px visible square, 1px gap
 
   canvas.width  = COLS * BLOCK;
   canvas.height = ROWS * BLOCK;
@@ -93,7 +93,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   img.src = 'profile.jpg';
 
   img.onload = () => {
-    // Sample the image into COLS×ROWS at a center-crop square
     const off = document.createElement('canvas');
     off.width  = COLS;
     off.height = ROWS;
@@ -104,79 +103,109 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     offCtx.drawImage(img, sx, sy, s, s, 0, 0, COLS, ROWS);
     const data = offCtx.getImageData(0, 0, COLS, ROWS).data;
 
-    // Build pixel list with random staggered reveal delays
     const pixels = [];
     for (let y = 0; y < ROWS; y++) {
       for (let x = 0; x < COLS; x++) {
         const i = (y * COLS + x) * 4;
-        pixels.push({
-          x, y,
-          r: data[i],
-          g: data[i + 1],
-          b: data[i + 2],
-          a: data[i + 3] / 255,
-          delay: Math.random() * 1600
-        });
+        pixels.push({ x, y, r: data[i], g: data[i+1], b: data[i+2], a: data[i+3]/255 });
       }
     }
 
-    // Phase 1: reveal — pixels fade in with random stagger
-    const FADE  = 280;
-    const start = performance.now();
+    const N = pixels.length;
 
-    function reveal(now) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      let allDone = true;
-
-      for (const p of pixels) {
-        const elapsed = now - start - p.delay;
-        if (elapsed < 0) { allDone = false; continue; }
-        const t = Math.min(1, elapsed / FADE);
-        if (t < 1) allDone = false;
-        ctx.fillStyle = `rgba(${p.r},${p.g},${p.b},${(p.a * t).toFixed(3)})`;
-        ctx.fillRect(p.x * BLOCK + GAP, p.y * BLOCK + GAP, BLOCK - GAP, BLOCK - GAP);
+    // Return a shuffled stagger-delay array spread over `window` ms
+    function makeDelays(window) {
+      const d = Array.from({length: N}, (_, i) => i * window / N);
+      for (let i = N - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [d[i], d[j]] = [d[j], d[i]];
       }
-
-      if (allDone) requestAnimationFrame(idle);
-      else         requestAnimationFrame(reveal);
+      return d;
     }
 
-    // Phase 2: idle — diagonal sine wave + random pixel sparks forever
-    const sparks = new Map(); // pixelIndex → sparkStartTime
+    const sparks = new Map(); // index → start time
 
-    function idle(now) {
-      const t = now * 0.00055; // wave speed
+    // Shared draw — alphas[] is per-pixel [0..1] multiplier
+    function draw(alphas, now) {
+      const wt = now * 0.00055;
 
-      // ~5 new sparks per second
-      if (Math.random() < 0.08) {
-        sparks.set(Math.floor(Math.random() * pixels.length), now);
-      }
+      // ~20 glitter sparks/sec
+      if (Math.random() < 0.33) sparks.set(Math.floor(Math.random() * N), now);
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      for (let i = 0; i < pixels.length; i++) {
+      for (let i = 0; i < N; i++) {
+        const alpha = pixels[i].a * alphas[i];
+        if (alpha <= 0.004) continue;
+
         const p = pixels[i];
+        const wave = Math.sin(wt + (p.x + p.y) * 0.055) * 0.08 + 0.92;
 
-        // Slow diagonal wave (brightness 0.82–1.0)
-        const wave = Math.sin(t + (p.x + p.y) * 0.07) * 0.09 + 0.91;
-
-        // Short brightness spark (sine arc over 220 ms, up to +45%)
-        let spark = 1;
+        let spark = 1, glit = 0;
         if (sparks.has(i)) {
-          const age = (now - sparks.get(i)) / 220;
-          if (age >= 1) sparks.delete(i);
-          else spark = 1 + Math.sin(age * Math.PI) * 0.45;
+          const age = (now - sparks.get(i)) / 140;
+          if (age >= 1) { sparks.delete(i); }
+          else { const f = Math.sin(age * Math.PI); spark = 1 + f * 0.6; glit = f * 0.55; }
         }
 
         const b = wave * spark;
-        ctx.fillStyle = `rgba(${Math.min(255,Math.round(p.r*b))},${Math.min(255,Math.round(p.g*b))},${Math.min(255,Math.round(p.b*b))},${p.a})`;
-        ctx.fillRect(p.x * BLOCK + GAP, p.y * BLOCK + GAP, BLOCK - GAP, BLOCK - GAP);
+        const r  = Math.min(255, Math.round(p.r * b + 255 * glit));
+        const g  = Math.min(255, Math.round(p.g * b + 255 * glit));
+        const bl = Math.min(255, Math.round(p.b * b + 255 * glit));
+        ctx.fillStyle = `rgba(${r},${g},${bl},${alpha.toFixed(3)})`;
+        ctx.fillRect(p.x * BLOCK, p.y * BLOCK, SZ, SZ);
       }
-
-      requestAnimationFrame(idle);
     }
 
-    requestAnimationFrame(reveal);
+    const FADE_IN  = 220;  // ms for one pixel to fully appear
+    const FADE_OUT = 180;  // ms for one pixel to fully vanish
+    const STAGGER  = 1300; // total stagger window
+    const IDLE_MS  = 3200; // stay fully visible before dissolving
+
+    function runReveal() {
+      const delays = makeDelays(STAGGER);
+      const alphas = new Float32Array(N);
+      const start  = performance.now();
+      function frame(now) {
+        let done = true;
+        for (let i = 0; i < N; i++) {
+          const e = now - start - delays[i];
+          alphas[i] = e < 0 ? 0 : Math.min(1, e / FADE_IN);
+          if (alphas[i] < 1) done = false;
+        }
+        draw(alphas, now);
+        done ? runIdle(performance.now() + IDLE_MS) : requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+
+    function runIdle(until) {
+      const alphas = new Float32Array(N).fill(1);
+      function frame(now) {
+        draw(alphas, now);
+        now >= until ? runDissolve() : requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+
+    function runDissolve() {
+      const delays = makeDelays(STAGGER);
+      const alphas = new Float32Array(N).fill(1);
+      const start  = performance.now();
+      function frame(now) {
+        let done = true;
+        for (let i = 0; i < N; i++) {
+          const e = now - start - delays[i];
+          alphas[i] = e < 0 ? 1 : Math.max(0, 1 - e / FADE_OUT);
+          if (alphas[i] > 0) done = false;
+        }
+        draw(alphas, now);
+        done ? runReveal() : requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+
+    runReveal();
   };
 })();
 
