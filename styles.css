@@ -1007,7 +1007,8 @@ p:last-child { margin-bottom: 0; }
 /* ─── RESPONSIVE ────────────────────────────────────────── */
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; }
-  .hero-visual { display: none; }
+  .hero-visual { display: flex; justify-content: center; margin-top: 32px; }
+  .pixel-face-wrap { max-width: 280px; width: 100%; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .contact-grid { grid-template-columns: 1fr; }
 }
