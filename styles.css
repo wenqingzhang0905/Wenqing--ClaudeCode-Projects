@@ -632,28 +632,33 @@ p:last-child { margin-bottom: 0; }
 }
 
 /* ─── ORBIT ABOUT WHEEL ─────────────────────────────────── */
-.orbit-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 52px;
+.orbit-center-layout {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 44px;
   margin-top: 40px;
 }
 .orbit-wheel-wrap {
   width: 100%;
-  max-width: 420px;
-  margin: 0 auto;
+  max-width: 460px;
 }
 .orbit-wheel-wrap svg {
   width: 100%;
   height: auto;
   display: block;
 }
+.orbit-hint {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  margin: 10px 0 0;
+}
 .orbit-content-wrap {
-  display: flex;
-  flex-direction: column;
-  min-height: 300px;
-  justify-content: center;
+  width: 100%;
+  max-width: 680px;
 }
 .orbit-panel {
   opacity: 0;
@@ -664,7 +669,8 @@ p:last-child { margin-bottom: 0; }
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.14em;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
+  text-align: center;
 }
 .op-heading {
   font-size: clamp(1.5rem, 3vw, 2rem);
@@ -672,23 +678,27 @@ p:last-child { margin-bottom: 0; }
   line-height: 1.2;
   color: var(--text);
   margin-bottom: 18px;
+  text-align: center;
 }
 .op-body {
   font-size: 0.97rem;
   line-height: 1.8;
   color: var(--text-muted);
   margin-bottom: 24px;
+  text-align: center;
 }
 .op-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 32px;
+  justify-content: center;
 }
 .op-nav {
   display: flex;
   align-items: center;
   gap: 16px;
+  justify-content: center;
 }
 .op-prev, .op-next {
   font-family: var(--mono);
@@ -710,8 +720,6 @@ p:last-child { margin-bottom: 0; }
   display: flex;
   gap: 8px;
   align-items: center;
-  flex: 1;
-  justify-content: center;
 }
 .op-dot {
   width: 7px;
@@ -1112,7 +1120,7 @@ p:last-child { margin-bottom: 0; }
   .hero-grid { grid-template-columns: 1fr; }
   .hero-visual { display: flex; justify-content: center; margin-top: 32px; }
   .pixel-face-wrap { max-width: 280px; width: 100%; }
-  .orbit-layout { grid-template-columns: 1fr; gap: 32px; }
+  .orbit-wheel-wrap { max-width: 320px; }
   .about-info-row { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
 }
