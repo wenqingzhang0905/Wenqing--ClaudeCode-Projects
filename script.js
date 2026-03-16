@@ -209,6 +209,186 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   };
 })();
 
+/* ─── ORBIT ABOUT WHEEL ─────────────────────────────────── */
+(function initOrbitWheel() {
+  const svg    = document.getElementById('orbitSvg');
+  const panel  = document.getElementById('orbitPanel');
+  if (!svg || !panel) return;
+
+  const CX = 200, CY = 200, OR = 148, IR = 82, LABEL_R = 168;
+  const SPAN = 116; // 120° - 4° gap
+
+  const SEGS = [
+    {
+      label: 'Climate',
+      color: '#3dba7c', rgb: '61,186,124',
+      mid: 270,
+      heading: 'Climate Action',
+      body: 'The biggest gap in climate action isn\'t ideas — it\'s the bridge between intention and measurable impact. After pivoting from macro policy at the IMF and World Bank, I joined climate tech to build systems that make carbon accountability real, verifiable, and scalable.',
+      tags: ['Carbon Markets', 'MRV Systems', 'Net-Zero Strategy', 'Decarbonization']
+    },
+    {
+      label: 'Capital',
+      color: '#e08030', rgb: '224,128,48',
+      mid: 30,
+      heading: 'Capital & Finance',
+      body: 'Years at the IMF and World Bank taught me how capital actually moves — and how to translate complex macro data into policy that billions of dollars follow. I now apply that lens to climate finance: understanding risk, unlocking investment, and building the economic case for net-zero.',
+      tags: ['Climate Finance', 'Impact Investing', 'Macro Policy', 'IMF · World Bank']
+    },
+    {
+      label: 'Innovation',
+      color: '#3b82a0', rgb: '59,130,160',
+      mid: 150,
+      heading: 'AI & Innovation',
+      body: 'An MBA from MIT Sloan wasn\'t just strategy — it was learning how technology reshapes economics. I\'m fascinated by how AI is changing the cost curves of decarbonization: optimizing grids, automating carbon accounting, and unlocking efficiencies that weren\'t possible five years ago.',
+      tags: ['AI & Technology', 'Product Strategy', 'Climate Tech', 'Energy Markets']
+    }
+  ];
+
+  let active = 0;
+
+  function rad(d) { return d * Math.PI / 180; }
+
+  function arcPath(start, end) {
+    const s = rad(start), e = rad(end);
+    const x1 = CX + OR * Math.cos(s), y1 = CY + OR * Math.sin(s);
+    const x2 = CX + OR * Math.cos(e), y2 = CY + OR * Math.sin(e);
+    const x3 = CX + IR * Math.cos(e), y3 = CY + IR * Math.sin(e);
+    const x4 = CX + IR * Math.cos(s), y4 = CY + IR * Math.sin(s);
+    const span = (end - start + 360) % 360;
+    const lg   = span > 180 ? 1 : 0;
+    const f = n => n.toFixed(2);
+    return `M ${f(x1)} ${f(y1)} A ${OR} ${OR} 0 ${lg} 1 ${f(x2)} ${f(y2)} L ${f(x3)} ${f(y3)} A ${IR} ${IR} 0 ${lg} 0 ${f(x4)} ${f(y4)} Z`;
+  }
+
+  function el(tag, attrs) {
+    const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    Object.entries(attrs).forEach(([k, v]) => e.setAttribute(k, v));
+    return e;
+  }
+
+  function buildSvg() {
+    svg.innerHTML = '';
+
+    // subtle grid background
+    const defs = el('defs', {});
+    defs.innerHTML = `<pattern id="og" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(61,186,124,0.05)" stroke-width="0.5"/>
+    </pattern>`;
+    svg.appendChild(defs);
+    svg.appendChild(el('rect', { width: 400, height: 400, fill: 'url(#og)' }));
+
+    SEGS.forEach((seg, i) => {
+      const isActive = i === active;
+      const start    = seg.mid - SPAN / 2;
+      const end      = seg.mid + SPAN / 2;
+      const tx       = (isActive ? 9 : 0) * Math.cos(rad(seg.mid));
+      const ty       = (isActive ? 9 : 0) * Math.sin(rad(seg.mid));
+
+      const path = el('path', {
+        d:              arcPath(start, end),
+        fill:           `rgba(${seg.rgb},${isActive ? 0.26 : 0.08})`,
+        stroke:         seg.color,
+        'stroke-width': isActive ? '2' : '1',
+        'stroke-opacity': isActive ? '0.9' : '0.35',
+        style:          `cursor:pointer;transition:all 0.25s ease;transform:translate(${tx.toFixed(1)}px,${ty.toFixed(1)}px);${isActive ? `filter:drop-shadow(0 0 10px rgba(${seg.rgb},0.45))` : ''}`
+      });
+
+      const onEnter = () => { if (i !== active) { path.setAttribute('fill', `rgba(${seg.rgb},0.16)`); path.setAttribute('stroke-opacity', '0.6'); }};
+      const onLeave = () => { if (i !== active) { path.setAttribute('fill', `rgba(${seg.rgb},0.08)`); path.setAttribute('stroke-opacity', '0.35'); }};
+      path.addEventListener('click',      () => setActive(i));
+      path.addEventListener('mouseenter', onEnter);
+      path.addEventListener('mouseleave', onLeave);
+      svg.appendChild(path);
+
+      // label outside arc
+      const lx = CX + LABEL_R * Math.cos(rad(seg.mid));
+      const ly = CY + LABEL_R * Math.sin(rad(seg.mid));
+      const grp = el('g', { style: 'cursor:pointer' });
+      grp.addEventListener('click', () => setActive(i));
+
+      grp.appendChild(el('text', {
+        x: lx.toFixed(1), y: (ly + 4).toFixed(1),
+        'text-anchor':  'middle',
+        'font-family':  'JetBrains Mono, monospace',
+        'font-size':    '11',
+        'font-weight':  isActive ? '700' : '500',
+        fill:           isActive ? seg.color : 'rgba(170,190,175,0.55)',
+        'letter-spacing': '0.08em'
+      })).textContent = seg.label.toUpperCase();
+
+      grp.appendChild(el('circle', {
+        cx: lx.toFixed(1), cy: (ly + 13).toFixed(1),
+        r: '2.5',
+        fill: isActive ? seg.color : 'rgba(170,190,175,0.3)'
+      }));
+      svg.appendChild(grp);
+    });
+
+    // center ring + text
+    svg.appendChild(el('circle', {
+      cx: CX, cy: CY, r: IR - 10,
+      fill:           'rgba(61,186,124,0.04)',
+      stroke:         'rgba(61,186,124,0.22)',
+      'stroke-width': '1',
+      'stroke-dasharray': '4 3'
+    }));
+    ['WHERE', 'I BUILD'].forEach((word, i) => {
+      const t = el('text', {
+        x: CX, y: CY + (i === 0 ? -5 : 9),
+        'text-anchor':    'middle',
+        'font-family':    'JetBrains Mono, monospace',
+        'font-size':      '8',
+        'font-weight':    '700',
+        fill:             'rgba(61,186,124,0.65)',
+        'letter-spacing': '0.1em'
+      });
+      t.textContent = word;
+      svg.appendChild(t);
+    });
+  }
+
+  function renderPanel() {
+    const seg = SEGS[active];
+    panel.style.transition = 'none';
+    panel.style.opacity    = '0';
+    panel.style.transform  = 'translateY(12px)';
+
+    setTimeout(() => {
+      panel.innerHTML = `
+        <div class="op-label" style="color:${seg.color}">— ${seg.label.toUpperCase()} —</div>
+        <h2 class="op-heading">${seg.heading}</h2>
+        <p class="op-body">${seg.body}</p>
+        <div class="op-tags">
+          ${seg.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+        </div>
+        <div class="op-nav">
+          <button class="op-prev">← prev</button>
+          <div class="op-dots">
+            ${SEGS.map((_, i) => `<span class="op-dot${i === active ? ' op-dot-active' : ''}" ${i === active ? `style="background:${seg.color}"` : ''}></span>`).join('')}
+          </div>
+          <button class="op-next">next →</button>
+        </div>
+      `;
+      panel.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+      panel.style.opacity    = '1';
+      panel.style.transform  = 'translateY(0)';
+
+      panel.querySelector('.op-prev').addEventListener('click', () => setActive((active - 1 + SEGS.length) % SEGS.length));
+      panel.querySelector('.op-next').addEventListener('click', () => setActive((active + 1) % SEGS.length));
+    }, 160);
+  }
+
+  function setActive(i) {
+    active = i;
+    buildSvg();
+    renderPanel();
+  }
+
+  buildSvg();
+  renderPanel();
+})();
+
 /* ─── CONTACT FORM ──────────────────────────────────────── */
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {

@@ -88,119 +88,46 @@
   <section class="section" id="about">
     <div class="container">
       <div class="section-label">About Me</div>
-      <div class="about-grid">
+      <!-- Orbit wheel layout -->
+      <div class="orbit-layout">
 
-        <!-- Left: text + passion cards -->
-        <div class="about-text">
-          <h2 class="section-title">Intentional about <span class="gradient-text">every step</span></h2>
-          <p>
-            I didn't fall into sustainability — I chose it. After years at the IMF and World Bank translating
-            macro data into policy, and an MBA at MIT Sloan, I joined climate tech to do the work
-            that actually moves the needle. The biggest gap in climate action isn't ideas — it's the bridge
-            between intention and measurable impact. That's where I build.
-          </p>
-          <p>
-            I also write about it on <strong>Substack</strong> (English) and <strong>小红书</strong> (Chinese),
-            because this conversation needs more people in it.
-          </p>
-
-          <!-- Passion cards -->
-          <div class="passion-grid">
-            <div class="passion-card passion-finance">
-              <div class="passion-icon">💰</div>
-              <div class="passion-label">Capital & Finance</div>
-              <p class="passion-desc">Macro policy · Impact investing · Climate finance</p>
-            </div>
-            <div class="passion-card passion-climate">
-              <div class="passion-icon">🌱</div>
-              <div class="passion-label">Climate Action</div>
-              <p class="passion-desc">Carbon markets · MRV · Net-zero strategy</p>
-            </div>
-            <div class="passion-card passion-tech">
-              <div class="passion-icon">🤖</div>
-              <div class="passion-label">AI & Technology</div>
-              <p class="passion-desc">How AI reshapes decarbonization economics</p>
-            </div>
-          </div>
-
-          <div class="about-tags">
-            <span class="tag">AI &amp; Innovation</span>
-            <span class="tag">Product Strategy</span>
-            <span class="tag">Climate Finance</span>
-            <span class="tag">Carbon Markets</span>
-            <span class="tag">Energy Markets</span>
-            <span class="tag">Climate Tech</span>
-          </div>
+        <!-- Left: interactive SVG wheel -->
+        <div class="orbit-wheel-wrap">
+          <svg id="orbitSvg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
         </div>
 
-        <!-- Right: venn + info cards -->
-        <div class="about-card-stack">
-          <div class="venn-wrap">
-            <div class="venn-header">
-              <div class="venn-dots"><span></span><span></span><span></span></div>
-              <span class="venn-filename">intersection.svg</span>
-            </div>
-            <svg class="venn-svg" viewBox="0 0 300 268" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <pattern id="vgrid" width="18" height="18" patternUnits="userSpaceOnUse">
-                  <path d="M 18 0 L 0 0 0 18" fill="none" stroke="rgba(61,186,124,0.07)" stroke-width="0.5"/>
-                </pattern>
-                <radialGradient id="nvg1" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#e08030" stop-opacity="0.18"/>
-                  <stop offset="100%" stop-color="#e08030" stop-opacity="0.01"/>
-                </radialGradient>
-                <radialGradient id="nvg2" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#3dba7c" stop-opacity="0.18"/>
-                  <stop offset="100%" stop-color="#3dba7c" stop-opacity="0.01"/>
-                </radialGradient>
-                <radialGradient id="nvg3" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#3b82a0" stop-opacity="0.18"/>
-                  <stop offset="100%" stop-color="#3b82a0" stop-opacity="0.01"/>
-                </radialGradient>
-              </defs>
-              <rect width="300" height="268" fill="url(#vgrid)"/>
-              <text x="5" y="10" font-family="JetBrains Mono,monospace" font-size="7" fill="rgba(61,186,124,0.22)">0,0</text>
-              <text x="275" y="10" font-family="JetBrains Mono,monospace" font-size="7" fill="rgba(61,186,124,0.22)" text-anchor="end">300,0</text>
-              <circle class="vc vc1" cx="122" cy="112" r="80" fill="url(#nvg1)" stroke="rgba(224,128,48,0.5)" stroke-width="1.2" stroke-dasharray="5 3"/>
-              <circle class="vc vc2" cx="188" cy="112" r="80" fill="url(#nvg2)" stroke="rgba(61,186,124,0.5)" stroke-width="1.2" stroke-dasharray="5 3"/>
-              <circle class="vc vc3" cx="155" cy="170" r="80" fill="url(#nvg3)" stroke="rgba(59,130,160,0.5)" stroke-width="1.2" stroke-dasharray="5 3"/>
-              <text x="46" y="32" font-family="JetBrains Mono,monospace" font-size="10" font-weight="600" fill="#e08030" letter-spacing="0.04em">Capital</text>
-              <text x="194" y="32" font-family="JetBrains Mono,monospace" font-size="10" font-weight="600" fill="#3dba7c" letter-spacing="0.04em">Climate</text>
-              <text x="155" y="262" font-family="JetBrains Mono,monospace" font-size="10" font-weight="600" fill="#3b82a0" text-anchor="middle" letter-spacing="0.04em">Technology</text>
-              <circle class="vc-center" cx="155" cy="134" r="26" fill="rgba(61,186,124,0.08)" stroke="rgba(61,186,124,0.45)" stroke-width="1.2"/>
-              <text x="155" y="129" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7.5" font-weight="700" fill="#3dba7c" letter-spacing="0.06em">where</text>
-              <text x="155" y="142" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7.5" font-weight="700" fill="#3dba7c" letter-spacing="0.06em">I build</text>
-              <circle cx="16" cy="148" r="3" fill="rgba(224,128,48,0.3)" class="fd fd1"/>
-              <circle cx="284" cy="218" r="4" fill="rgba(61,186,124,0.25)" class="fd fd2"/>
-              <circle cx="278" cy="44" r="2.5" fill="rgba(59,130,160,0.35)" class="fd fd3"/>
-              <circle cx="8" cy="66" r="2" fill="rgba(61,186,124,0.4)" class="fd fd4"/>
-            </svg>
-          </div>
-          <div class="info-card">
-            <div class="info-card-icon">🎓</div>
-            <div>
-              <div class="info-card-title">Education</div>
-              <div class="info-card-value">MBA · MIT Sloan School of Management</div>
-              <div class="info-card-sub">MA Applied Economics · Georgetown · BS Economics · UMD</div>
-            </div>
-          </div>
-          <div class="info-card">
-            <div class="info-card-icon">📍</div>
-            <div>
-              <div class="info-card-title">Location</div>
-              <div class="info-card-value">Boston, MA</div>
-            </div>
-          </div>
-          <div class="info-card">
-            <div class="info-card-icon">✍️</div>
-            <div>
-              <div class="info-card-title">Also writing on</div>
-              <div class="info-card-value">Substack &amp; 小红书 (RED)</div>
-              <div class="info-card-sub">Sustainability, career, and technology</div>
-            </div>
-          </div>
+        <!-- Right: dynamic content panel -->
+        <div class="orbit-content-wrap">
+          <div class="orbit-panel" id="orbitPanel"></div>
         </div>
 
+      </div>
+
+      <!-- Info row below -->
+      <div class="about-info-row">
+        <div class="info-card">
+          <div class="info-card-icon">🎓</div>
+          <div>
+            <div class="info-card-title">Education</div>
+            <div class="info-card-value">MBA · MIT Sloan School of Management</div>
+            <div class="info-card-sub">MA Applied Economics · Georgetown · BS Economics · UMD</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">📍</div>
+          <div>
+            <div class="info-card-title">Location</div>
+            <div class="info-card-value">Boston, MA</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">✍️</div>
+          <div>
+            <div class="info-card-title">Also writing on</div>
+            <div class="info-card-value">Substack &amp; 小红书 (RED)</div>
+            <div class="info-card-sub">Sustainability, career, and technology</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
